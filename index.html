@@ -87,30 +87,34 @@
 
   <script type="text/x-handlebars" id="editshow">
     <div class="row">
-    <div class="col-sm-offset-3 col-sm-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">Edit Show {{id}}</h4>
-      </div>
-      <div class="panel-body">
-        <form role="form">
-          <div class="form-group">
-            <label for="idInput">ID</label>
-            <input type="number" class="form-control" id="idInput" value="{{id}}">
-          </div> 
-          <div class="form-group">
-            <label for="titleInput">Title</label>
-            <input type="text" class="form-control" id="titleInput" value="{{title}}">
+      <div class="col-sm-offset-3 col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Edit Show #{{id}}</h4>
           </div>
-          <div class="form-group">
-            <label for="episodeInput">Episode</label>
-            <input type="number" class="form-control" id="episodeInput" value="{{episode}}">
+          <div class="panel-body">
+            {{partial 'editshow/form'}}
+            <div class="text-right">
+              <button {{action "doneEditing"}} class="btn btn-default">Save</button>
+              <button onclick="window.history.back()" class="btn btn-default">Back</button>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
-    </div>
-    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="editshow/form">
+    <form role="form">
+      <div class="form-group">
+        <label for="titleInput">Title</label>
+        {{input value=title classNames="form-control" id="titleInput" type="text"}}
+      </div>
+      <div class="form-group">
+        <label for="episodeInput">Episode</label>
+        {{input value=episode classNames="form-control" id="episodeInput" type="number"}}
+      </div>
+    </form>
   </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
