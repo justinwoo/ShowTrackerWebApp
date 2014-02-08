@@ -43,16 +43,75 @@
         <h4 class="panel-title">My Shows</h4>
       </div>
       <table class="table">
-        <tr>
+        <thead>
           <th>ID</th>
           <th>Title</th>
           <th>Episode</th>
-        </tr>
+        </Tracker>
+        {{#each}}
+          <tr>
+            <td>{{id}}</td>
+            <td>
+              <div class="row">
+                <div class="col-sm-8">{{title}}</div>
+                <div class="col-sm-offset-2 col-sm-2">
+                  {{#link-to 'editshow' this
+                    classNames="btn btn-default btn-small"}}
+                    <span class="glyphicon glyphicon-pencil"></span>変更
+                  {{/link-to}}
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-sm-2">{{episode}}</div>
+                <div class="col-sm-offset-1 col-sm-4">
+                  <div class="btn-group">
+                    <button class="btn btn-default">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button class="btn btn-default">
+                      <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>  
+            </td>
+          </tr>
+        {{/each}}
       </table>
+
+      {{outlet}}
     </div>
   </script>
 
-
+  <script type="text/x-handlebars" id="editshow">
+    <div class="row">
+    <div class="col-sm-offset-3 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Edit Show {{id}}</h4>
+      </div>
+      <div class="panel-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="idInput">ID</label>
+            <input type="number" class="form-control" id="idInput" value="{{id}}">
+          </div> 
+          <div class="form-group">
+            <label for="titleInput">Title</label>
+            <input type="text" class="form-control" id="titleInput" value="{{title}}">
+          </div>
+          <div class="form-group">
+            <label for="episodeInput">Episode</label>
+            <input type="number" class="form-control" id="episodeInput" value="{{episode}}">
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    </div>
+  </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
   <script src="js/libs/handlebars-1.1.2.js"></script>
