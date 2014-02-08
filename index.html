@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Show Tracker Web App</title>
   <link rel="stylesheet" href="./css/bootstrap.min.css">
-  <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+  <!-- <link rel="stylesheet" href="./css/bootstrap-theme.min.css"> -->
   <style type="text/css">
     body {
       font-family: "Meiryo";
@@ -12,15 +12,32 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <script type="text/x-handlebars">
+    <div class="navbar navbar-default">
+      <a class="navbar-brand" href="#">ShowTracker</a>
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="#">Home</a>
+        </li>
+        <li>
+          {{#link-to 'about'}}About{{/link-to}}
+        </li>
+        <li>
+          {{#link-to 'posts'}}Posts{{/link-to}}
+        </li>
+      </ul>
+    </div>
 
-    <script type="text/x-handlebars">
-      <h2>content goes here</h2>
-
+    <div class="container">
       {{outlet}}
-    </script>
+    </div>
+  </script>
 
-  </div>
+
+  <script type="text/x-handlebars-template" id="about">
+    説明をこっちへ書いて下さい
+  </script>
+
 
 
   <script src="js/libs/jquery-1.10.2.js"></script>
