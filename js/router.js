@@ -5,13 +5,10 @@ App.Router.map(function () {
   });
 });
 
-App.ShowsRoute = Ember.Route.extend({
-  
+App.ShowsRoute = Ember.Route.extend({  
   model: function() {
-    // return shows;
     return this.store.findAll('show');
   }
-
 });
 
 App.EditshowRoute = Ember.Route.extend({
@@ -19,9 +16,3 @@ App.EditshowRoute = Ember.Route.extend({
     return this.store.find('show', params.show_id);
   }
 });
-
-var shows = [{
-  id: '1',
-  title: '俺のお嫁さんと一心同体',
-  episode: '1'
-}];
