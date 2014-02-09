@@ -2,3 +2,7 @@
 .active {
   font-weight: bold;
 }
+
+.padding-bottom {
+  padding-bottom: 10px;
+}
