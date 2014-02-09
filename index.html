@@ -80,16 +80,25 @@
             </td>
           </tr>
         {{/each}}
+        <tr>
+          <td></td>
+          <td>
+            <div class="row">
+              <div class="col-sm-8">
+                {{input value=rowNewTitle action="createShow" placeholder="新しい行を入れる" classNames="form-control" id="titleInput" type="text"}}
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-sm-2">
+                {{input value=rowNewEpisode action="createShow" classNames="form-control" id="episodeInput" type="number" }}
+              </div>
+            </div>
+          </td>
+        </tr>
       </table>
       {{outlet}}
-    </div>
-    <div class="row padding-bottom">
-      <div class="col-sm-offset-10 col-sm-2">
-        {{#link-to 'createshow'
-          classNames="btn btn-default btn-lg"}}
-          <span class="glyphicon glyphicon-plus"></span>新登録
-        {{/link-to}}
-     </div>
     </div>
   </script>
 
@@ -113,16 +122,18 @@
   </script>
 
   <script type="text/x-handlebars" id="createshow/form" data-template="createshow">
-    <form role="form">
-      <div class="form-group">
-        <label for="titleInput">Title</label>
-        {{input value=newTitle classNames="form-control" id="titleInput" type="text"}}
-      </div>
-      <div class="form-group">
-        <label for="episodeInput">Episode</label>
-        {{input value=newEpisode classNames="form-control" id="episodeInput" type="number"}}
-      </div>
-    </form>
+    {{#if editingMode}}
+      <form role="form">
+        <div class="form-group">
+          <label for="titleInput">Title</label>
+          {{input value=newTitle classNames="form-control" id="rowTitleInput" type="text"}}
+        </div>
+        <div class="form-group">
+          <label for="episodeInput">Episode</label>
+          {{input value=newEpisode classNames="form-control" id="rowEpisodeInput" type="number"}}
+        </div>
+      </form>
+    {{/if}}
   </script>
 
   <script type="text/x-handlebars" id="editshow">

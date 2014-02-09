@@ -7,10 +7,12 @@ App.Router.map(function () {
 });
 
 App.ShowsRoute = Ember.Route.extend({
+  
   model: function() {
     // return shows;
     return this.store.findAll('show');
   }
+
 });
 
 App.EditshowRoute = Ember.Route.extend({

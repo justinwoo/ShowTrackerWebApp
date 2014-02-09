@@ -4,31 +4,49 @@ App.Store = DS.Store.extend({
 });
 
 App.ShowsController = Ember.ArrayController.extend({
+  rowNewTitle: null,
+  rowNewEpisode: 1,
+
   actions: {
     increment: function (item) {
-      // var existingShow = App.Show.find('id', item.id);
-      // existingShow.set('id', 500);
+      var episode = parseInt(item.get('episode'));
+      episode += 1;
+      item.set('episode', episode);
+      item.save();
     },
     decrement: function (item) {
-      episode = item.episode - 1;
+      var episode = parseInt(item.get('episode'));
+      episode -= 1;
+      item.set('episode', episode);
+      item.save();
+    },
+    createShow: function () {
+      var newTitle = this.get('rowNewTitle');
+      var newEpisode = this.get('rowNewEpisode');
+      var newShow = this.store.createRecord('show', {
+        id: 3,
+        title: newTitle,
+        episode: newEpisode
+      });
     }
   }
 });
 
 App.CreateshowController = Ember.ObjectController.extend({
+  editingMode: true,
   newTitle: null,
   newEpisode: null,
   actions: {
-    // submit: function () {
-    //   var newTitle = this.get('newTitle');
-    //   var newEpisode = this.get('newEpisode');
-    //   var newShow = App.Show.create({
-    //     id: 3,
-    //     title: newTitle,
-    //     episode: newEpisode
-    //   });
-    //   newShow.save();
-    // }
+    submit: function () {
+      var newTitle = this.get('newTitle');
+      var newEpisode = this.get('newEpisode');
+      var newShow = this.store.createRecord('show', {
+        id: 3,
+        title: newTitle,
+        episode: newEpisode
+      });
+      editingMode = false;
+    }
   }
 });
 

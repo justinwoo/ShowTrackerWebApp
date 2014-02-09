@@ -1,6 +1,6 @@
 App.Show = DS.Model.extend({
-  title: DS.attr(),
-  episode: DS.attr()
+  title: DS.attr('string'),
+  episode: DS.attr('number')
 });
 
 App.Show.FIXTURES = [
