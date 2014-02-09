@@ -2,7 +2,6 @@ App.Router.map(function () {
   this.resource('about');  
   this.resource('shows', function() {
     this.resource('editshow', { path: 'shows/edit/:show_id' });
-    this.resource('createshow', { path: 'shows/create' });
   });
 });
 

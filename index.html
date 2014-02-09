@@ -85,14 +85,14 @@
           <td>
             <div class="row">
               <div class="col-sm-8">
-                {{input value=rowNewTitle action="createShow" placeholder="新しい行を入れる" classNames="form-control" id="titleInput" type="text"}}
+                {{input value=rowNewTitle action="createShow" placeholder="新しい行を入れる" classNames="form-control" id="rowTitleInput" type="text"}}
               </div>
             </div>
           </td>
           <td>
             <div class="row">
               <div class="col-sm-2">
-                {{input value=rowNewEpisode action="createShow" classNames="form-control" id="episodeInput" type="number" }}
+                {{input value=rowNewEpisode action="createShow" classNames="form-control" id="rowEpisodeInput" type="number" }}
               </div>
             </div>
           </td>
@@ -100,40 +100,6 @@
       </table>
       {{outlet}}
     </div>
-  </script>
-
-  <script type="text/x-handlebars" id="createshow">
-    <div class="row">
-      <div class="col-sm-offset-3 col-sm-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">Create Show</h4>
-          </div>
-          <div class="panel-body">
-            {{partial 'createshow/form'}}
-            <div class="text-right">
-              <button {{action "submit"}} class="btn btn-default">セーブ</button>
-              <button onclick="window.history.back()" class="btn btn-default">戻す</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </script>
-
-  <script type="text/x-handlebars" id="createshow/form" data-template="createshow">
-    {{#if editingMode}}
-      <form role="form">
-        <div class="form-group">
-          <label for="titleInput">Title</label>
-          {{input value=newTitle classNames="form-control" id="rowTitleInput" type="text"}}
-        </div>
-        <div class="form-group">
-          <label for="episodeInput">Episode</label>
-          {{input value=newEpisode classNames="form-control" id="rowEpisodeInput" type="number"}}
-        </div>
-      </form>
-    {{/if}}
   </script>
 
   <script type="text/x-handlebars" id="editshow">
@@ -146,7 +112,7 @@
           <div class="panel-body">
             {{partial 'editshow/form'}}
             <div class="text-right">
-              <button {{action "doneEditing" id}} class="btn btn-default">セーブ</button>
+              <button {{action "doneEditing" this}} class="btn btn-default">セーブ</button>
               <a href="#/shows" class="btn btn-default">閉める</a>
             </div>
           </div>

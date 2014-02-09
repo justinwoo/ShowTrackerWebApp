@@ -32,38 +32,20 @@ App.ShowsController = Ember.ArrayController.extend({
   }
 });
 
-App.CreateshowController = Ember.ObjectController.extend({
-  editingMode: true,
-  newTitle: null,
-  newEpisode: null,
-  actions: {
-    submit: function () {
-      var newTitle = this.get('newTitle');
-      var newEpisode = this.get('newEpisode');
-      var newShow = this.store.createRecord('show', {
-        id: 3,
-        title: newTitle,
-        episode: newEpisode
-      });
-      editingMode = false;
-    }
-  }
-});
-
 App.EditshowController = Ember.ObjectController.extend({
   newTitle: null,
   newEpisode: null,
   actions: {
-    doneEditing: function (id) {
-      // var newTitle = this.get('newTitle');
-      // var newEpisode = this.get('newEpisode');
-      // var existingShow = App.Show.find('id', id);
-      // if (newTitle != null) {
-      //   existingShow.set('title', newTitle);
-      // }
-      // if (newEpisode != null) {
-      //   existingShow.set('episode', newEpisode);
-      // }      
+    doneEditing: function (item) {
+      var newTitle = this.get('newTitle');
+      var newEpisode = this.get('newEpisode');
+      if (newTitle != null) {
+        item.set('title', newTitle);
+      }
+      if (newEpisode != null) {
+        item.set('episode', newEpisode);
+      }      
+      item.save();
     }
   }
 });
