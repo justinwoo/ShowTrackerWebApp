@@ -1,6 +1,6 @@
 App = Ember.Application.create();
 App.Store = DS.Store.extend({
-  adapter: DS.FixtureAdapter
+//  adapter: DS.FixtureAdapter
 });
 
 App.ShowsController = Ember.ArrayController.extend({
@@ -9,6 +9,12 @@ App.ShowsController = Ember.ArrayController.extend({
 
   actions: {
     increment: function (item) {
+      // var id = item.get('id');
+      // var existingShow = this.store.find('show', id).then( function (result) {
+      //   result.incrementProperty('episode');
+      // }, function (error) {
+      //   console.log("error: " + error);
+      // });
       var episode = parseInt(item.get('episode'));
       episode += 1;
       item.set('episode', episode);

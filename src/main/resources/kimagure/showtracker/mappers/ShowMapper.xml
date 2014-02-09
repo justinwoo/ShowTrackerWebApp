@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+        'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='kimagure.showtracker.mappers.ShowMapper'>
+    <!--result maps-->
+    <resultMap type='Show' id='ShowResult'>
+        <id property='id' column='id'/>
+        <result property='title' column='title'/>
+        <result property='episode' column='episode'/>
+    </resultMap>
+
+    <!--select queries-->
+    <select id='getShowById' parameterType='int' resultType='Show'>
+        SELECT
+            id as id,
+            title as title,
+            episode as episode
+        FROM shows
+        WHERE id = #{id}
+    </select>
+
+    <select id='getAllShows' resultMap='ShowResult'>
+        SELECT * FROM shows
+    </select>
+
+    <!--insert queries-->
+    <insert id='insertShow' parameterType='Show' useGeneratedKeys='true' keyProperty='id'>
+        INSERT INTO shows(title, episode)
+        VALUES(#{title}, #{episode})
+    </insert>
+
+    <!--update queries-->
+    <update id='updateShow' parameterType='Show'>
+        UPDATE shows
+        SET
+            title = #{title},
+            episode = #{episode}
+        WHERE id = #{id}
+    </update>
+
+</mapper>
