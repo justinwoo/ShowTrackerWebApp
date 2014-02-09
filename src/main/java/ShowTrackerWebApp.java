@@ -1,5 +1,7 @@
 import spark.*;
 import static spark.Spark.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,16 +12,12 @@ import static spark.Spark.*;
  * cross your fingers and run the tests!
  */
 public class ShowTrackerWebApp {
-    public static void main(String[] args) {
-        staticFileLocation("/public");
+    static Logger logger;
 
-        get(new Route("/") {
-            @Override
-            public Object handle(Request request, Response response) {
-                response.redirect("index.html");
-                return null;
-            }
-        });
+    public static void main(String[] args) {
+        logger = LoggerFactory.getLogger(ShowTrackerWebApp.class);
+
+        staticFileLocation("/public");
 
         get(new Route("/hello") {
             @Override
