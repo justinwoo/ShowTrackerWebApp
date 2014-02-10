@@ -5,14 +5,16 @@ import kimagure.showtracker.embermodels.EmberShow;
 import kimagure.showtracker.embermodels.EmberShows;
 import kimagure.showtracker.models.Show;
 import kimagure.showtracker.service.ShowService;
-import spark.*;
-import static spark.Spark.*;
+import kimagure.showtracker.transformer.JsonTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import kimagure.showtracker.transformer.JsonTransformer;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static spark.Spark.*;
 
 /**
  * Created with IntelliJ IDEA.

@@ -41,13 +41,13 @@
   <script type="text/x-handlebars" id="shows">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">My Shows</h4>
+        <h4 class="panel-title">今季節の番組</h4>
       </div>
       <table class="table">
         <thead>
           <th>ID</th>
-          <th colspan="2">Title</th>
-          <th colspan="3">Episode</th>
+          <th colspan="2">名</th>
+          <th colspan="3">数</th>
         </thead>
         {{#each}}
           <tr>
@@ -79,37 +79,34 @@
         {{/each}}
         <tr>
           <td></td>
-          <td>
+          <td colspan="2">
             {{input value=rowNewTitle action="createShow" placeholder="新しい行を入れる" classNames="form-control" id="rowTitleInput" type="text"}}
           </td>
-          <td></td>
-          <td>
+          <td colspan="3">
             {{input value=rowNewEpisode action="createShow" classNames="form-control" id="rowEpisodeInput" type="number"}}
           </td>
-          <td></td>
-          <td></td>
         </tr>
       </table>
       {{#if deleteConfirmation}}
-        {{partial 'shows/delete' this}}
+        {{partial 'shows/delete'}}
       {{else}}
         {{outlet}}
       {{/if}}
     </div>
   </script>
 
-  <script type="text/x-handlebars" id="shows/delete" data-template="show">
+  <script type="text/x-handlebars" id="shows/delete">
     <div class="row">
       <div class="col-sm-offset-3 col-sm-6">
         <div class="panel panel-danger">
           <div class="panel-heading">
-            <h4 class="panel-title">ホントに #{{id}}: {{title}} を消してもいいの？</h4>
+            <h3 class="panel-title">"#{{deleteId}}: {{deleteTitle}}" を消してもいいの？</h3>
           </div>
           <div class="panel-body">
             マジでこれで最後だよ！
             <div class="text-right">
-              <button {{action delete this}} class="btn btn-default">イェス</button>
-              <a href="#/shows" class="btn btn-default">戻る</a>
+              <button {{action delete}} class="btn btn-default">イェス</button>
+              <button {{action cancelDelete}} class="btn btn-default">戻る</a>
             </div>
           </div>
         </div>

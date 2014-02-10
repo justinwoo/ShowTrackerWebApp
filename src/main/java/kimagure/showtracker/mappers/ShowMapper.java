@@ -1,7 +1,6 @@
 package kimagure.showtracker.mappers;
 
 import kimagure.showtracker.models.Show;
-import org.apache.ibatis.annotations.Delete;
 
 import java.util.List;
 
