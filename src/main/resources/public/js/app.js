@@ -4,17 +4,13 @@ App.Store = DS.Store.extend({
 });
 
 App.ShowsController = Ember.ArrayController.extend({
+  deleteConfirmation: false,
+  deleteShow: null,
   rowNewTitle: null,
   rowNewEpisode: 1,
 
   actions: {
     increment: function (item) {
-      // var id = item.get('id');
-      // var existingShow = this.store.find('show', id).then( function (result) {
-      //   result.incrementProperty('episode');
-      // }, function (error) {
-      //   console.log("error: " + error);
-      // });
       var episode = parseInt(item.get('episode'));
       episode += 1;
       item.set('episode', episode);
@@ -27,13 +23,24 @@ App.ShowsController = Ember.ArrayController.extend({
       item.save();
     },
     createShow: function () {
+      var self = this;
       var newTitle = this.get('rowNewTitle');
       var newEpisode = this.get('rowNewEpisode');
       var newShow = this.store.createRecord('show', {
-        id: 3,
         title: newTitle,
         episode: newEpisode
       });
+      this.transitionTo('shows', newShow.save());
+    },
+    delete: function (item) {
+      deleteConfirmation = false;
+      item.deleteRecord();
+      item.save();
+    },
+    confirmDelete: function (item) {
+      console.log("confirm for " + item);
+      deleteConfirmation = true;
+      deleteShow = item;
     }
   }
 });

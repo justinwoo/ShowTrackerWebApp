@@ -1,5 +1,7 @@
 package kimagure.showtracker;
 
+import com.google.gson.Gson;
+import kimagure.showtracker.embermodels.EmberShow;
 import kimagure.showtracker.embermodels.EmberShows;
 import kimagure.showtracker.models.Show;
 import kimagure.showtracker.service.ShowService;
@@ -23,10 +25,12 @@ import java.util.List;
 public class ShowTrackerWebApp {
     private static Logger logger;
     private static ShowService showService;
+    private static Gson gson;
 
     public static void main(String[] args) {
         logger = LoggerFactory.getLogger(ShowTrackerWebApp.class);
         showService = new ShowService();
+        gson = new Gson();
 
         staticFileLocation("/public");
 
@@ -41,15 +45,42 @@ public class ShowTrackerWebApp {
             @Override
             public Object handle(Request request, Response response) {
                 EmberShows emberShows = new EmberShows();
-//                Show show = new Show();
-//                show.setId(1);
-//                show.setEpisode(1);
-//                show.setTitle("我妻と幸せの日々");
-//                List<Show> listShows = new ArrayList<>();
-//                listShows.add(show);
-                List<Show> listShows = showService.getAllShows();
+                List<Show> listShows= showService.getAllShows();
                 emberShows.setShows(listShows);
                 return emberShows;
+            }
+        });
+
+        put(new JsonTransformer("/shows/:id") {
+            @Override
+            public Object handle(Request request, Response response) {
+                Integer id = Integer.parseInt(request.params("id"));
+                String body = request.body();
+                EmberShow emberShow = gson.fromJson(body, EmberShow.class);
+                Show show = emberShow.getShow();
+                show.setId(id);
+                showService.updateShow(show);
+                return show;
+            }
+        });
+
+        post(new JsonTransformer("/shows") {
+            @Override
+            public Object handle(Request request, Response response) {
+                String body = request.body();
+                EmberShow emberShow = gson.fromJson(body, EmberShow.class);
+                Show show = emberShow.getShow();
+                showService.insertShow(show);
+                return emberShow;
+            }
+        });
+
+        delete(new Route("/shows/:id") {
+            @Override
+            public Object handle(Request request, Response response) {
+                Integer id = Integer.parseInt(request.params("id"));
+                showService.deleteShow(id);
+                return "";
             }
         });
     }

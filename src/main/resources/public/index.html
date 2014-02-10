@@ -31,11 +31,11 @@
   </script>
 
   <script type="text/x-handlebars" id="index">
-    <h3>こっちへ紹介を書いて下さい</h3>
+    <h3>こっちへ紹介を書いてくれ！</h3>
   </script>
 
   <script type="text/x-handlebars" id="about">
-    <h3>こっちへ説明を書いて下さい</h3>
+    <h3>こっちへ説明を書いてくれ！</h3>
   </script>
 
   <script type="text/x-handlebars" id="shows">
@@ -46,61 +46,76 @@
       <table class="table">
         <thead>
           <th>ID</th>
-          <th>Title</th>
-          <th>Episode</th>
+          <th colspan="2">Title</th>
+          <th colspan="3">Episode</th>
         </thead>
         {{#each}}
           <tr>
             <td>{{id}}</td>
+            <td>{{title}}</td>
             <td>
-              <div class="row">
-                <div class="col-sm-8">{{title}}</div>
-                <div class="col-sm-offset-2 col-sm-2">
-                  {{#link-to 'editshow' this
-                    classNames="btn btn-default btn-sm" id=editbutton_id}}
-                    <span class="glyphicon glyphicon-pencil"></span>変更
-                  {{/link-to}}
-                </div>
+              {{#link-to 'editshow' this
+                classNames="btn btn-default btn-sm" id=editbutton_id}}
+                <span class="glyphicon glyphicon-pencil"></span>変更
+              {{/link-to}}
+            </td> 
+            <td>{{episode}}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-default btn-sm" {{action increment this}}>
+                  <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button class="btn btn-default btn-sm" {{action decrement this}}>
+                  <span class="glyphicon glyphicon-minus"></span>
+                </button>
               </div>
             </td>
             <td>
-              <div class="row">
-                <div class="col-sm-2">{{episode}}</div>
-                <div class="col-sm-offset-1 col-sm-6">
-                  <div class="btn-group">
-                    <button class="btn btn-default btn-sm" {{action increment this}}>
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                    <button class="btn btn-default btn-sm" {{action decrement this}}>
-                      <span class="glyphicon glyphicon-minus"></span>
-                    </button>
-                  </div>
-                </div>
-              </div>  
+              <button {{action confirmDelete this}} class="btn btn-danger btn-sm btn-block"}}
+                <span class="glyphicon glyphicon-death"></span>消す
+              </button>
             </td>
           </tr>
         {{/each}}
         <tr>
           <td></td>
           <td>
-            <div class="row">
-              <div class="col-sm-8">
-                {{input value=rowNewTitle action="createShow" placeholder="新しい行を入れる" classNames="form-control" id="rowTitleInput" type="text"}}
-              </div>
-            </div>
+            {{input value=rowNewTitle action="createShow" placeholder="新しい行を入れる" classNames="form-control" id="rowTitleInput" type="text"}}
           </td>
+          <td></td>
           <td>
-            <div class="row">
-              <div class="col-sm-2">
-                {{input value=rowNewEpisode action="createShow" classNames="form-control" id="rowEpisodeInput" type="number" }}
-              </div>
-            </div>
+            {{input value=rowNewEpisode action="createShow" classNames="form-control" id="rowEpisodeInput" type="number"}}
           </td>
+          <td></td>
+          <td></td>
         </tr>
       </table>
-      {{outlet}}
+      {{#if deleteConfirmation}}
+        {{partial 'shows/delete' this}}
+      {{else}}
+        {{outlet}}
+      {{/if}}
     </div>
   </script>
+
+  <script type="text/x-handlebars" id="shows/delete" data-template="show">
+    <div class="row">
+      <div class="col-sm-offset-3 col-sm-6">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <h4 class="panel-title">ホントに #{{id}}: {{title}} を消してもいいの？</h4>
+          </div>
+          <div class="panel-body">
+            マジでこれで最後だよ！
+            <div class="text-right">
+              <button {{action delete this}} class="btn btn-default">イェス</button>
+              <a href="#/shows" class="btn btn-default">戻る</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>  
 
   <script type="text/x-handlebars" id="editshow">
     <div class="row">
@@ -113,7 +128,7 @@
             {{partial 'editshow/form'}}
             <div class="text-right">
               <button {{action "doneEditing" this}} class="btn btn-default">セーブ</button>
-              <a href="#/shows" class="btn btn-default">閉める</a>
+              <a href="#/shows" class="btn btn-default">戻る</a>
             </div>
           </div>
         </div>

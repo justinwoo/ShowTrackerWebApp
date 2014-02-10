@@ -25,7 +25,7 @@
     </select>
 
     <!--insert queries-->
-    <insert id='insertShow' parameterType='Show' useGeneratedKeys='true' keyProperty='id'>
+    <insert id='insertShow' parameterType='Show' useGeneratedKeys='true' keyProperty='id' keyColumn='id'>
         INSERT INTO shows(title, episode)
         VALUES(#{title}, #{episode})
     </insert>
@@ -38,5 +38,11 @@
             episode = #{episode}
         WHERE id = #{id}
     </update>
+
+    <!--delete queries-->
+    <delete id="deleteShow" parameterType='int'>
+        DELETE FROM shows
+        WHERE id = #{id}
+    </delete>
 
 </mapper>

@@ -56,4 +56,15 @@ public class ShowService {
             sqlSession.close();
         }
     }
+
+    public void deleteShow(Integer id) {
+        SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+        try {
+            ShowMapper showMapper = sqlSession.getMapper(ShowMapper.class);
+            showMapper.deleteShow(id);
+            sqlSession.commit();
+        } finally {
+            sqlSession.close();
+        }
+    }
 }

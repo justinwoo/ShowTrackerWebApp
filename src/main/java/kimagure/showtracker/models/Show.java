@@ -39,6 +39,6 @@ public class Show {
 
     @Override
     public String toString() {
-        return "On episode " + episode + " of " + title;
+        return "{:id " + id + " :title " + title + " :episode " + episode + " }";
     }
 }

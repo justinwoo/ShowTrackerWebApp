@@ -1,6 +1,7 @@
 package kimagure.showtracker.mappers;
 
 import kimagure.showtracker.models.Show;
+import org.apache.ibatis.annotations.Delete;
 
 import java.util.List;
 
@@ -17,4 +18,5 @@ public interface ShowMapper {
     public Show getShowById(Integer id);
     public List<Show> getAllShows();
     public void updateShow(Show show);
+    public void deleteShow(Integer id);
 }
